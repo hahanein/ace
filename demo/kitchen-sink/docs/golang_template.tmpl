@@ -1,24 +1,45 @@
+{{/*header.tmpl*/}}
 {{define "header"}}
 <html>
 <head>
-    <title>Something here</title>
+    <title>{{index .Meta "param"}}</title>
+    <style>
+    body {
+        background-color: red;
+    }
+    #id {
+        color: blue;
+    }
+    .class {
+        width: 100%;
+        {{index .Css "color"}}
+    }
+    </style>
 </head>
 <body>
 {{end}}
+{{"\"output\""}}
 
 {{/*content.tmpl*/}}
 {{define "content"}}
 {{template "header"}}
 <h1>Nested here</h1>
 <ul>
-    <li>Nested usag</li>
-    <li>Call template</li>
+    {{range $index, $value := .List}}
+    <li>{{$value.SomeField}}</li>
+    {{end}}
 </ul>
+{{if and (.BoolIsTrue) (.OtherBoolIsTrue)}}
 {{template "footer"}}
 {{end}}
 
 {{/*footer.tmpl*/}}
 {{define "footer"}}
+{{`raw 
+
+string
+
+constant`}}
 </body>
 </html>
 {{end}}
