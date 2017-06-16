@@ -29,9 +29,13 @@
     <li>{{$value.SomeField}}</li>
     {{end}}
 </ul>
-{{if and (.BoolIsTrue) (.OtherBoolIsTrue)}}
+{{if and (.SomeBoolIsTrue) (.OtherBoolIsTrue)}}
 {{template "footer"}}
 {{end}}
+
+{{index . "index" "index"}}
+{{index .Param "index"}}
+{{index $var.Param "index"}}
 
 {{/*footer.tmpl*/}}
 {{define "footer"}}
@@ -40,6 +44,8 @@
 string
 
 constant`}}
+
+{{customFunc (index .AnotherField "index")}}
 </body>
 </html>
 {{end}}
